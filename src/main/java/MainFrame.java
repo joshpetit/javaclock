@@ -16,6 +16,7 @@ public class MainFrame extends JFrame {
         GridBagLayout layout = new GridBagLayout();
         this.setLayout(layout);
         this.setBounds(0, 0, 150, 75);
+        this.setMinimumSize(new Dimension(50, 50));
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
@@ -24,17 +25,13 @@ public class MainFrame extends JFrame {
             }
         });
         this.addMouseMotionListener(new MouseAdapter() {
-            int lastY;
 
             @Override
             public void mouseDragged(MouseEvent e) {
                 if (e.isControlDown()) {
-                    if (lastY < e.getYOnScreen()) {
-                        setSize(MainFrame.this.getWidth() - 1, MainFrame.this.getHeight() - 1);
-                    } else {
-                        setSize(MainFrame.this.getWidth() + 1, MainFrame.this.getHeight() + 1);
-                    }
-                    lastY = e.getYOnScreen();
+                    int width = e.getX();
+                    int height = e.getY();
+                    setSize(width, height);
                 } else {
                     setLocation(e.getXOnScreen() - posX, e.getYOnScreen() - posY);
                 }
