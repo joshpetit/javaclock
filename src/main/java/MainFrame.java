@@ -44,8 +44,4 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
     }
 
-    private void incFontSize() {
-        time.setFont(new Font(Font.SERIF, Font.PLAIN, time.getFont().getSize() + 1));
-    }
-
 }

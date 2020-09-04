@@ -1,2 +1,3 @@
 ./javaclock.iml
 ./.idea
+./target/classes/*
