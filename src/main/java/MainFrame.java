@@ -1,7 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.beans.PropertyChangeListener;
 
 public class MainFrame extends JFrame {
     int posX, posY;
@@ -18,14 +21,30 @@ public class MainFrame extends JFrame {
         this.setBounds(0, 0, 150, 75);
         this.setMinimumSize(new Dimension(50, 50));
         this.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent mouseEvent) {
-                posX = mouseEvent.getX();
-                posY = mouseEvent.getY();
+        @Override
+        public void mousePressed(MouseEvent mouseEvent) {
+            posX = mouseEvent.getX();
+            posY = mouseEvent.getY();
+            if (mouseEvent.isPopupTrigger()) {
+                popUp(mouseEvent);
             }
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            if (e.isPopupTrigger()) {
+                popUp(e);
+            }
+        }
+
+        public void popUp(MouseEvent e) {
+            PopUp menu = new PopUp();
+            menu.show(e.getComponent(), e.getX(), e.getY());
+        }
+
         });
         this.addMouseMotionListener(new MouseAdapter() {
-
             @Override
             public void mouseDragged(MouseEvent e) {
                 if (e.isControlDown()) {
@@ -44,4 +63,17 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
     }
 
+    private class PopUp extends JPopupMenu {
+        JMenuItem quit;
+
+        public PopUp() {
+            quit = new JMenuItem(new AbstractAction("Quit") {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    MainFrame.this.dispose();
+                }
+            });
+            this.add(quit);
+        }
+    }
 }
