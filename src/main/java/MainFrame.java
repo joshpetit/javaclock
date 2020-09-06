@@ -21,12 +21,13 @@ public class MainFrame extends JFrame {
         this.setBounds(0, 0, 150, 75);
         this.setMinimumSize(new Dimension(50, 50));
         this.addMouseListener(new MouseAdapter() {
+            PopUp menu = new PopUp();
             @Override
-            public void mousePressed(MouseEvent mouseEvent) {
-                posX = mouseEvent.getX();
-                posY = mouseEvent.getY();
-                if (mouseEvent.isPopupTrigger()) {
-                    popUp(mouseEvent);
+            public void mousePressed(MouseEvent e) {
+                posX = e.getX();
+                posY = e.getY();
+                if (e.isPopupTrigger()) {
+                    popUp(e);
                 }
 
             }
@@ -39,7 +40,6 @@ public class MainFrame extends JFrame {
             }
 
             public void popUp(MouseEvent e) {
-                PopUp menu = new PopUp();
                 menu.show(e.getComponent(), e.getX(), e.getY());
             }
         });
