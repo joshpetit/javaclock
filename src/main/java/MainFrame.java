@@ -21,28 +21,27 @@ public class MainFrame extends JFrame {
         this.setBounds(0, 0, 150, 75);
         this.setMinimumSize(new Dimension(50, 50));
         this.addMouseListener(new MouseAdapter() {
-        @Override
-        public void mousePressed(MouseEvent mouseEvent) {
-            posX = mouseEvent.getX();
-            posY = mouseEvent.getY();
-            if (mouseEvent.isPopupTrigger()) {
-                popUp(mouseEvent);
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+                posX = mouseEvent.getX();
+                posY = mouseEvent.getY();
+                if (mouseEvent.isPopupTrigger()) {
+                    popUp(mouseEvent);
+                }
+
             }
 
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            if (e.isPopupTrigger()) {
-                popUp(e);
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (e.isPopupTrigger()) {
+                    popUp(e);
+                }
             }
-        }
 
-        public void popUp(MouseEvent e) {
-            PopUp menu = new PopUp();
-            menu.show(e.getComponent(), e.getX(), e.getY());
-        }
-
+            public void popUp(MouseEvent e) {
+                PopUp menu = new PopUp();
+                menu.show(e.getComponent(), e.getX(), e.getY());
+            }
         });
         this.addMouseMotionListener(new MouseAdapter() {
             @Override
@@ -71,6 +70,7 @@ public class MainFrame extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     MainFrame.this.dispose();
+                    System.exit(0);
                 }
             });
             this.add(quit);
