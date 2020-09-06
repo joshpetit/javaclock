@@ -3,8 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
-import java.beans.PropertyChangeListener;
 
 public class MainFrame extends JFrame {
     int posX, posY;
@@ -21,7 +19,8 @@ public class MainFrame extends JFrame {
         this.setBounds(0, 0, 150, 75);
         this.setMinimumSize(new Dimension(50, 50));
         this.addMouseListener(new MouseAdapter() {
-            PopUp menu = new PopUp();
+            final PopUp menu = new PopUp();
+
             @Override
             public void mousePressed(MouseEvent e) {
                 posX = e.getX();
