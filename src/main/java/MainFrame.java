@@ -27,10 +27,10 @@ public class MainFrame extends JFrame {
             public void keyPressed(KeyEvent keyEvent) {
                 switch (keyEvent.getKeyChar()){
                     case '+':
-                        modFont(1);
+                        modFont((keyEvent.isControlDown() ? 10 : 1));
                         break;
                     case '-':
-                        modFont(-1);
+                        modFont(keyEvent.isControlDown() ? -10 : -1);
                 }
             }
 
