@@ -1,4 +1,5 @@
 import timetools.Time;
+import timetools.Timer;
 import timetools.TimeChange;
 
 import javax.swing.*;
@@ -67,7 +68,8 @@ public class MainFrame extends JFrame {
         });
         time = new JLabel();
         TimeChange tc = time::setText;
-        Time timeChange = new Time(tc);
+        Timer timeChange = new Timer(tc);
+        timeChange.startTimer("00:00:01");
         this.add(time);
         this.setVisible(true);
     }
