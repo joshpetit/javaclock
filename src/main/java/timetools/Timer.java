@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class Timer {
+public class Timer extends TimeTool {
     private TimeChange clock;
     private DateTimeFormatter dtf;
     private LocalTime currentTime;
@@ -20,16 +20,21 @@ public class Timer {
         dtf = dtfb.toFormatter();
     }
 
-    public void startTimer(String time) {
+    public void start(String time) {
         ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
         currentTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm:ss"));
         ses.scheduleAtFixedRate(() -> {
             currentTime = currentTime.minusSeconds(1);
-            if (currentTime.equals(end)) {
+            if (currentTime.equals(end) && !stopped) {
                 ses.shutdown();
             }
             clock.changeTime(dtf.format(currentTime));
         }, 0, 1, TimeUnit.SECONDS);
+
+    }
+
+    @Override
+    public void start() {
 
     }
 }

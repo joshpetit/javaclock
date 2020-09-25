@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class Time {
+public class Time extends TimeTool{
     TimeChange clock;
     DateTimeFormatter dtf;
 
@@ -16,12 +16,16 @@ public class Time {
         DateTimeFormatterBuilder dtfb = new DateTimeFormatterBuilder();
         dtfb.appendPattern("h:mm:ss");
         dtf = dtfb.toFormatter();
-        sendTime();
+        start();
     }
 
-    public void sendTime() {
+    @Override
+    public void start() {
         ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
         ses.scheduleAtFixedRate(() -> {
+            if (stopped) {
+                ses.shutdown();
+            }
             clock.changeTime(dtf.format(LocalTime.now()));
         }, 0, 1,TimeUnit.SECONDS);
     }

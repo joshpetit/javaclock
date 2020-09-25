@@ -1,4 +1,5 @@
 import timetools.Time;
+import timetools.TimeTool;
 import timetools.Timer;
 import timetools.TimeChange;
 
@@ -68,8 +69,8 @@ public class MainFrame extends JFrame {
         });
         time = new JLabel();
         TimeChange tc = time::setText;
-        Timer timeChange = new Timer(tc);
-        timeChange.startTimer("00:00:01");
+        TimeTool timeTool = new Time(tc);
+        timeTool.start();
         this.add(time);
         this.setVisible(true);
     }
@@ -82,13 +83,20 @@ public class MainFrame extends JFrame {
 
     private class PopUp extends JPopupMenu {
         JMenuItem quit;
-
+        JMenuItem timer;
+        JMenuItem time;
         public PopUp() {
             quit = new JMenuItem(new AbstractAction("Quit") {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     MainFrame.this.dispose();
                     System.exit(0);
+                }
+            });
+            timer = new JMenuItem(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+
                 }
             });
             this.add(quit);
