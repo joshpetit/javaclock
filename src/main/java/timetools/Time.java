@@ -16,7 +16,6 @@ public class Time extends TimeTool{
         DateTimeFormatterBuilder dtfb = new DateTimeFormatterBuilder();
         dtfb.appendPattern("h:mm:ss");
         dtf = dtfb.toFormatter();
-        start();
     }
 
     @Override

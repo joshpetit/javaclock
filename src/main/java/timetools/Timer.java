@@ -25,7 +25,7 @@ public class Timer extends TimeTool {
         currentTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm:ss"));
         ses.scheduleAtFixedRate(() -> {
             currentTime = currentTime.minusSeconds(1);
-            if (currentTime.equals(end) && !stopped) {
+            if (currentTime.equals(end) || stopped) {
                 ses.shutdown();
             }
             clock.changeTime(dtf.format(currentTime));
