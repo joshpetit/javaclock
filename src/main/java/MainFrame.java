@@ -1,3 +1,6 @@
+import timetools.Time;
+import timetools.TimeChange;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
