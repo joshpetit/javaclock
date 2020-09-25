@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class MainFrame extends JFrame {
     int posX, posY;
@@ -18,6 +16,24 @@ public class MainFrame extends JFrame {
         this.setLayout(layout);
         this.setBounds(0, 0, 150, 75);
         this.setMinimumSize(new Dimension(50, 50));
+        this.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent keyEvent) {}
+
+            @Override
+            public void keyPressed(KeyEvent keyEvent) {
+                switch (keyEvent.getKeyChar()){
+                    case '+':
+                        modFont(1);
+                        break;
+                    case '-':
+                        modFont(-1);
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent keyEvent) {}
+        });
         this.addMouseListener(new MouseAdapter() {
             final PopUp menu = new PopUp();
 
