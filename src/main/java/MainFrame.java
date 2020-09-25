@@ -10,6 +10,8 @@ import java.awt.event.*;
 public class MainFrame extends JFrame {
     int posX, posY;
     JLabel time;
+    TimeTool timeTool;
+    TimeChange tc;
 
     public MainFrame() {
         super();
@@ -68,8 +70,8 @@ public class MainFrame extends JFrame {
             }
         });
         time = new JLabel();
-        TimeChange tc = time::setText;
-        TimeTool timeTool = new Time(tc);
+        tc = time::setText;
+        timeTool = new Time(tc);
         timeTool.start();
         this.add(time);
         this.setVisible(true);
@@ -84,7 +86,7 @@ public class MainFrame extends JFrame {
     private class PopUp extends JPopupMenu {
         JMenuItem quit;
         JMenuItem timer;
-        JMenuItem time;
+        JMenuItem clock;
         public PopUp() {
             quit = new JMenuItem(new AbstractAction("Quit") {
                 @Override
@@ -93,12 +95,25 @@ public class MainFrame extends JFrame {
                     System.exit(0);
                 }
             });
-            timer = new JMenuItem(new AbstractAction() {
+            timer = new JMenuItem(new AbstractAction("Timer") {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-
+                    timeTool.stop();
+                    Timer timer = new Timer(tc);
+                    timer.start(JOptionPane.showInputDialog("Time in HH:mm:ss Format"));
+                    timeTool = timer;
                 }
             });
+            clock = new JMenuItem(new AbstractAction("Clock") {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    timeTool.stop();
+                    timeTool = new Time(tc);
+                    timeTool.start();
+                }
+            });
+            this.add(timer);
+            this.add(clock);
             this.add(quit);
         }
     }
