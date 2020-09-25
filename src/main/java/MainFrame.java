@@ -28,14 +28,6 @@ public class MainFrame extends JFrame {
                 if (e.isPopupTrigger()) {
                     popUp(e);
                 }
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                if (e.isPopupTrigger()) {
-                    popUp(e);
-                }
             }
 
             public void popUp(MouseEvent e) {
@@ -59,6 +51,12 @@ public class MainFrame extends JFrame {
         Time timeChange = new Time(tc);
         this.add(time);
         this.setVisible(true);
+    }
+
+    public void modFont(int delta) {
+        Font font = time.getFont();
+        delta = (font.getSize() + delta > 0) ? font.getSize() + delta : 1;
+        time.setFont(new Font(font.getName(), Font.PLAIN, delta));
     }
 
     private class PopUp extends JPopupMenu {
